@@ -22,7 +22,7 @@ var storage = multer.diskStorage({
   filename: (request, file, callback) => {
     callback(null, file.originalname);
 }});
-asdasdasdasdasd
+
 var upload = multer({ storage: storage });
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -33,9 +33,9 @@ var mongoConnectionLocal  = 'mongodb://localhost:27017/token'
 
 mongoose.Promise = global.Promise;
 mongoose.connect(mongoConnectionLocal, (error, database) => { if(error) { console.log(error); }});
-
+asdasd
 var app = express();
-
+dfsdfsdf
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Set controllers
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
