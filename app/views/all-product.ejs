@@ -1,0 +1,61 @@
+<html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
+<!-- Latest compiled and minified CSS -->
+<!-- Load jquery and bootstrap through google -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> 
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+<head>
+    <title>All Products</title>
+</head>
+<body>
+
+    <div style="padding-left: 30px; padding-right: 30px;">
+    <h3>List Of Products</h3>
+    <hr>
+     <table class="table table-responsive table-striped" cellpadding="11">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Sub Category</th>
+                <th>Brand</th>
+                <th>Created By</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if(products.length){        
+            for(var i = 0;i < products.length;i++) { %>
+            <tr>
+                <td> <%=(i+1)%></td>
+                <td> <%=products[i].name%></td>
+                <td> <%=products[i].description%> </td>
+                <td> <%=products[i].price%></td>
+                <td> <%=products[i].category%></td>
+                <td> <%=products[i].subCategory%></td>
+                <td> <%=products[i].brand%></td>
+                <td> <%=products[i].createdBy.firstName%> <%=products[i].createdBy.lastName%> </td>
+                <td> <img src = "/<%=products[i].imagePath%>" class="img-responsive" width=120px; ></td>
+                <td> <button class="btn btn-success">Order me</button></td>
+            </tr>
+            <% }
+        }else{ %>
+        <tr>
+            <td colspan="5">No Data</td>
+        </tr>
+        <% } %>
+    </tbody>
+</table>
+
+
+</div>
+</body>
+</html>

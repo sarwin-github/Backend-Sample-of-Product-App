@@ -1,0 +1,70 @@
+<html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
+<!-- Latest compiled and minified CSS -->
+<!-- Load jquery and bootstrap through google -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> 
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+<head>
+    <title>test</title>
+</head>
+<body>
+    <div style="padding-left:30px; padding-right:30px;">
+     <h3>Create Product</h3>
+     <form method="POST" action="/product/create" id="the-form" enctype="multipart/form-data">
+        <div class="form-group">
+            <label class="control-label">Name</label>
+            <input type="text" name="name" value="<%=product.name%>" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Description</label>
+            <input type="text" name="description" value="<%=product.description%>" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Price</label>
+            <input type="text" name="price" value="<%=product.price%>" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Category</label>
+            <input type="text" name="category" value="<%=product.category%>" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Sub Category</label>
+            <input type="text" name="subCategory" value="<%=product.subCategory%>" class="form-control"> 
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Brand</label>
+            <input type="text" name="brand" value="<%=product.brand%>" class="form-control">
+        </div>
+   
+        <div class="form-group">
+            <label class="control-label">Created By - Input ID for testing only</label>
+            <input type="text" name="createdBy" value="<%=product.createdBy%>" class="form-control">
+        </div>
+
+        <tr>
+            <td></td>
+            <td>
+                <input type="file" name="myimage"></input>
+                &nbsp;  
+            </td>
+        </tr>
+        <br>
+        <tr>
+            <td>
+                <input class="btn btn-primary" type="submit" name="submit" value="submit"></input>
+            </td>
+        </tr>
+    </table>
+</form>
+</div>
+</body>
+</html>

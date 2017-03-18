@@ -1,0 +1,54 @@
+<html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
+<!-- Latest compiled and minified CSS -->
+<!-- Load jquery and bootstrap through google -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> 
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+<head>
+    <title>Product Details</title>
+    <style type="text/css">
+    label{
+        padding-left: 25px;
+    }
+    </style>
+</head>
+<body>
+
+    <table class="table table-responsive"cellpadding="11">
+    <h3 style="padding-left:20px;">Product Details</h3>
+        <tr>
+            <td><label>Name</label>: <%=product.name%></td>
+        </tr>
+        <tr>
+            <td><label>Description</label>: <%=product.description%></td>
+        </tr>
+        <tr>
+            <td><label>Price</label>: <%=product.price%></td>
+        </tr>
+        <tr>
+            <td><label>Category</label>: <%=product.category%></td>
+        </tr>
+        <tr>
+            <td><label>Sub Category</label>: <%=product.subCategory%></td>
+        </tr>
+        <tr>
+            <td><label>Brand</label>: <%=product.brand%></td>
+        </tr>
+        <tr>
+            <td><label>Created By</label>: <%=product.createdBy.firstName%> <%=product.createdBy.lastName%> </td>
+        </tr>
+        <tr>
+            <td><label>Image</label>: <img src ="/<%=image_data%>" class="img-responsive" width="300px" style="padding-left: 50px;"></td>
+        </tr>
+
+        <tr>
+
+        </tr>
+    </table>
+
+</body>
+</html>
