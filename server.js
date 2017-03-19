@@ -146,7 +146,6 @@ var router = express.Router();
 		  .delete(authController.checkTheToken, /* authController.checkIfIPOSUser,*/productController.deleteProduct);
 
 
-
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Set restricted routes for Orders ----------(ALL ROUTES CHECKED)-----------
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

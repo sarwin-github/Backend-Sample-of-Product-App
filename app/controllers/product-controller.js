@@ -6,9 +6,6 @@ var mongoose 	= require('mongoose')
 , 	productData = require('../models/product-model.js')
 , 	Product 	= mongoose.model('Product');
 
-
-
-
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Create a product in product collection
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -17,8 +14,7 @@ exports.createProductForm = (request, response) => {
 	response.render('create-product.ejs', {product:product});
 };
 
-exports.createProduct = (request, response) => {
-	
+exports.createProduct = (request, response) => {	
 	var path = request.files[0].path;
  	var imageName = request.files[0].originalname;
  	var imagepath = {};
@@ -37,19 +33,15 @@ exports.createProduct = (request, response) => {
 	//Token temporary disable for testing
 	//product.createdBy 	= request.decode.id;
 	product.createdBy	= request.body.createdBy;
-
 	product.imagePath	= path;
 	product.imageOrgName = imageName;
 
-    product.save((error, product) => {
-        
-        if (error) {
-			
+    product.save((error, product) => {        
+        if (error) {			
 			return response.status(500).send({success: false, error: error, message: 'Something went wrong.'});
 		}
 
-		if (!product) {
-	
+		if (!product) {	
 			return response.status(200).send({success: false, message: 'Something went wrong.'});
 		}
 

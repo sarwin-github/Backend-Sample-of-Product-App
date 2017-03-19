@@ -7,32 +7,22 @@ var userData = require('../models/user-model.js')
 // Authenticate user
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 exports.authenticate = (request, response) => {
-	
 	var query = User.findOne({username: request.body.username});
 
 	query.exec((error, user) => {
-		
 		if (error) {
-			
 			return response.status(500).send({success: false, error: error, message: 'Something went wrong'});
 		}
 		
 		if (!user) {
-			
 			return response.status(200).send({success: false, message: 'User does not exist'});
-		} 
-		else {
-			
+		} else {
 			var validPassword = user.comparePassword(request.body.password);
 
 			if (!validPassword) {
-				
 				return response.status(200).send({success: false, message: 'Invalid password'});
-			} 
-			else {
-				
+			} else {
 				var token = jwt.sign({id: user.id, role: user.role}, process.env.KEY, {expiresIn: 4000});
-        	
         		response.json({success: true, user: user, token: token, message: 'Authentication successful'});
 			}
 		}
@@ -43,17 +33,13 @@ exports.authenticate = (request, response) => {
 // Check authentication
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 exports.checkAuthentication = (request, response) => {
-
 	var token = request.body.token || request.param('token') || request.headers['token'] || undefined;
 
 	jwt.verify(token, process.env.KEY, function (error, decode) {
-		
 		if (error) {
-
 			return response.status(401).send({success: false, error: error, message: 'Unauthorized'});
 		} 
 		else {
-			
         	response.json({success: true, message: 'Authenticate'});
 		}
 	});
@@ -67,17 +53,13 @@ exports.checkAuthentication = (request, response) => {
 // Check the token if valid
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 exports.checkTheToken = (request, response, next) => {
-
 	var token = request.body.token || request.param('token') || request.headers['token'] || undefined;
 
 	jwt.verify(token, process.env.KEY, function (error, decode) {
 		
 		if (error) {
-
 			return response.status(401).send({success: false, message: 'Unauthorized'});
-		} 
-		else {
-			
+		} else {
 			request.decode = decode;
 			next();
 		}
@@ -88,15 +70,11 @@ exports.checkTheToken = (request, response, next) => {
 // Check the admin key if valid
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 exports.checkTheAdminKey = (request, response, next) => {
-
 	var adminKey = request.body.adminKey;
 
 	if (adminKey != process.env.ADMIN_KEY || adminKey == undefined) {
-
 		return response.status(401).send({success: false, message: 'Unauthorized'});
-	} 
-	else {
-
+	} else {
 		next();
 	}
 };
@@ -105,13 +83,9 @@ exports.checkTheAdminKey = (request, response, next) => {
 // Check if user is an ipos-admin
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 exports.checkIfIPOSAdmin = (request, response, next) => {
-
 	if (request.decode.role == 'ipos-admin') {
-
 		next();
-	} 
-	else {
-
+	} else {
 		return response.status(401).send({success: false, message: 'Unauthorized'});
 	}
 };
@@ -120,13 +94,9 @@ exports.checkIfIPOSAdmin = (request, response, next) => {
 // Check if user is a ipos-user
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 exports.checkIfIPOSUser = function (request, response, next) {
-
 	if (request.decode.role == 'ipos-user') {
-
 		next();
-	} 
-	else {
-	
+	} else {
 		return response.status(401).send({success: false, message: 'Unauthorized'});
 	}
 };

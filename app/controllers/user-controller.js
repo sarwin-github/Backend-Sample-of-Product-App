@@ -7,8 +7,7 @@ var mongoose = require('mongoose')
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Read user in user collection ------------------------------- Show the profile of the logged in user -----------------------------
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-exports.readIPOSUser = (request, response) => {
-	
+exports.readIPOSUser = (request, response) => {	
 	var query = User.findById({_id: request.decode.id}).select({"__v": 0, "password": 0});
 
 	query.exec((error, user) => {
@@ -27,18 +26,14 @@ exports.readIPOSUser = (request, response) => {
 // Update any user in collection
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 exports.updateIPOSUser = (request, response) => {
-
 	var query = User.findById({_id: request.decode.id});
 	
-	query.exec((error, user) => {
-	    
-	    if (error) {
-		
+	query.exec((error, user) => {	    
+	    if (error) {		
 			return response.status(500).send({success: false, error: error, message: 'Something went wrong'});
 		}
 
-		if (!user) {
-		
+		if (!user) {		
 			return response.status(200).send({success: false, message: 'Something went wrong'});
 		}
 
@@ -58,10 +53,8 @@ exports.updateIPOSUser = (request, response) => {
 	    address.zip     = 	request.body.zip;
 
 	    // Save the product and check for errors 
-	    user.save(error => {
-	     	
-	     	if (error) {
-			
+	    user.save(error => {	     	
+	     	if (error) {			
 				return response.status(500).send({success: false, error: error, message: 'Something went wrong'});
 			}
 
@@ -74,18 +67,15 @@ exports.updateIPOSUser = (request, response) => {
 // Update user password in user collection
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 exports.updateIPOSUserPassword = (request, response) => {
-
 	var query = User.findById({_id: request.decode.id})
 	
 	query.exec((error, user) => {
 	    
-	    if (error) {
-			
+	    if (error) {			
 			return response.status(500).send({success: false, error: error, message: 'Something went wrong'});
 		}
 
-		if (!user) {
-		
+		if (!user) {		
 			return response.status(200).send({success: false, message: 'Something went wrong'});
 		}
 
@@ -93,10 +83,8 @@ exports.updateIPOSUserPassword = (request, response) => {
 		user.password =	request.body.password;
 
 	    // Save the product and check for errors 
-	    user.save(error => {
-	     	
-	     	if (error) {
-			
+	    user.save(error => {	     	
+	     	if (error) {			
 				return response.status(500).send({success: false, error: error, message: 'Something went wrong'});
 			}
 
@@ -132,8 +120,7 @@ exports.createIPOSUser = (request, response) => {
     user.age 		  	  = 	request.body.age;
     user.address      	  = 	address;
 
-    user.save((error, user) => {
-    
+    user.save((error, user) => {    
         if (error) {
 			return response.status(500).send({success: false, error: error, message: 'Something went wrong'});
 		}
@@ -144,8 +131,7 @@ exports.createIPOSUser = (request, response) => {
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Create an admin in user collection
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-exports.createIPOSAdmin = (request, response) => {
-	
+exports.createIPOSAdmin = (request, response) => {	
 	// Set Address Properties 
 	var address = new Address();
 
@@ -184,19 +170,15 @@ exports.createIPOSAdmin = (request, response) => {
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Read all users in user collection
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-exports.readAllUsers = (request, response) => {
-	
+exports.readAllUsers = (request, response) => {	
 	var query = User.find({}).select({"__v": 0, "password": 0, "userAddress._id": 0});
 
-	query.exec((error, users) => {
-		
-		if (error) {
-			
+	query.exec((error, users) => {		
+		if (error) {			
 			return response.status(500).send({success: false, error: error, message: 'Something went wrong'});
 		}
 
-		if (!users) {
-			
+		if (!users) {			
 			return response.status(200).send({success: false, message: 'No users registered'});
 		}
 
@@ -208,18 +190,14 @@ exports.readAllUsers = (request, response) => {
 // Delete user in user collection
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 exports.deleteUser = (request, response) => {
-
 	var query = User.findByIdAndRemove({_id: request.params.user_id});
 
-	query.exec((error, user) => {
-		
-		if (error) {
-		
+	query.exec((error, user) => {		
+		if (error) {		
 			return response.status(500).send({success: false, error: error, message: 'Something went wrong.'});
 		}
 
-		if (!user) {
-		
+		if (!user) {		
 			return response.status(200).send({success: false, message: 'Something went wrong.'});
 		}
 
