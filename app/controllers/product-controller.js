@@ -54,7 +54,6 @@ exports.createProduct = (request, response) => {
 // Read a product by using product ID as parameter
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 exports.readProduct = (request, response) => {
-
 	var query = Product.findById({_id: request.params.product_id})
 	.select({"__v": 0, "date_updated": 0})
 
@@ -63,14 +62,11 @@ exports.readProduct = (request, response) => {
 
 	query.exec((error, product) => {
 		
-		if (error) {
-			
+		if (error) {	
 			return response.status(500).send({success: false, error: error, message: 'Something went wrong.'});
 		} 
 
 		if (!product) {
-		
-
 			return response.status(200).send({success: false, message: 'Product does not exist'});
 		}
 
@@ -84,22 +80,18 @@ exports.readProduct = (request, response) => {
 // Read all products in product collection
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 exports.readAllProducts = (request, response) => {
-
 	var query = Product.find({})
 	.select({"__v": 0, "date_updated": 0})
 
 	// Populate who created the product and show ID, email, first name and last name
 	.populate('createdBy', ['firstName', 'lastName', 'email']); 
 
-	query.exec((error, products) => {
-		
-		if (error) {
-			
+	query.exec((error, products) => {	
+		if (error) {		
 			return response.status(500).send({success: false, error: error, message: 'Something went wrong.'});
 		} 
 
-		if (products.length == 0) {
-			
+		if (products.length == 0) {			
 			return response.status(200).send({success: false, message: 'No products registered.'});
 		}
 		var image_data = products.imagePath;
@@ -120,14 +112,11 @@ exports.readAllProductsByUserId = (request, response) => {
 	.populate('createdBy', ['firstName', 'lastName', 'email']); 
 
 	query.exec((error, products) => {
-
 		if (error) {
-			
 			return response.status(500).send({success: false, error: error, message: 'Something went wrong.'});
 		}
 
-		if (products.length == 0) {
-			
+		if (products.length == 0) {			
 			return response.status(200).send({success: false, message: 'No products registered.'});
 		}
 
@@ -144,13 +133,11 @@ exports.updateProduct = (request, response) => {
 
 	query.exec((error, product) => {
 
-		if (error) {
-			
+		if (error) {	
 			return response.status(500).send({success: false, error: error, message: 'Something went wrong.'});
 		}
 
 		if (!product) {
-
 			return response.status(200).send({success: false, message: 'Something went wrong.'});
 		}
 
@@ -176,7 +163,6 @@ exports.updateProduct = (request, response) => {
 	    product.save(error => {
 	      	
 	      	if (error) {
-
 				return response.status(500).send({success: false, error: error, message: 'Something went wrong.'});
 			}
 
@@ -189,18 +175,14 @@ exports.updateProduct = (request, response) => {
 // Delete product in product collection
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 exports.deleteProduct = (request, response) => {
-
 	var query = Product.findOneAndRemove({createdBy: request.decode.id, _id: request.params.product_id});
 
 	query.exec((error, product) => {
-	
 		if (error) {
-	
 			return response.status(500).send({success: false, error: error, message: 'Something went wrong.'});
 		}
 
 		if (!product) {
-
 			return response.status(200).send({success: false, message: 'Something went wrong.'});
 		}
 
