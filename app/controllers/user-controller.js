@@ -7,22 +7,18 @@ var mongoose = require('mongoose')
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Read user in user collection ------------------------------- Show the profile of the logged in user -----------------------------
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-module.exports.readIPOSUser = (request, response) => {
+exports.readIPOSUser = (request, response) => {
 	
 	var query = User.findById({_id: request.decode.id}).select({"__v": 0, "password": 0});
 
 	query.exec((error, user) => {
-		
 		if (error) {
-		
 			return response.status(500).send({success: false, error: error, message: 'Something went wrong'});
 		}
-
 		if (!user) {
 		
 			return response.status(200).send({success: false, message: 'User does not exist'});
 		}
-
 		response.json({success: true, user: user, message: 'Successfully fetched user profile'})
 	});
 };
@@ -30,7 +26,7 @@ module.exports.readIPOSUser = (request, response) => {
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Update any user in collection
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-module.exports.updateIPOSUser = (request, response) => {
+exports.updateIPOSUser = (request, response) => {
 
 	var query = User.findById({_id: request.decode.id});
 	
@@ -77,7 +73,7 @@ module.exports.updateIPOSUser = (request, response) => {
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Update user password in user collection
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-module.exports.updateIPOSUserPassword = (request, response) => {
+exports.updateIPOSUserPassword = (request, response) => {
 
 	var query = User.findById({_id: request.decode.id})
 	
@@ -112,7 +108,7 @@ module.exports.updateIPOSUserPassword = (request, response) => {
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Create a bidder in user collection
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-module.exports.createIPOSUser = (request, response) => {
+exports.createIPOSUser = (request, response) => {
 
 	// Set Address Properties 
 	var address = new Address();
@@ -148,7 +144,7 @@ module.exports.createIPOSUser = (request, response) => {
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Create an admin in user collection
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-module.exports.createIPOSAdmin = (request, response) => {
+exports.createIPOSAdmin = (request, response) => {
 	
 	// Set Address Properties 
 	var address = new Address();
@@ -188,7 +184,7 @@ module.exports.createIPOSAdmin = (request, response) => {
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Read all users in user collection
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-module.exports.readAllUsers = (request, response) => {
+exports.readAllUsers = (request, response) => {
 	
 	var query = User.find({}).select({"__v": 0, "password": 0, "userAddress._id": 0});
 
@@ -211,7 +207,7 @@ module.exports.readAllUsers = (request, response) => {
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Delete user in user collection
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-module.exports.deleteUser = (request, response) => {
+exports.deleteUser = (request, response) => {
 
 	var query = User.findByIdAndRemove({_id: request.params.user_id});
 

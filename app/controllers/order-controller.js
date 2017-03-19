@@ -6,7 +6,7 @@ var mongoose 	= require('mongoose')
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Create a orders in order collection
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-module.exports.createOrder = (request, response) => {
+exports.createOrder = (request, response) => {
 	
 	var order = new Order();
 
@@ -33,7 +33,7 @@ module.exports.createOrder = (request, response) => {
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Read all orders in order collection
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-module.exports.readAllOrders = (request, response) => {
+exports.readAllOrders = (request, response) => {
 
 	var query = Order.find({})
 	.select({"__v": 0, "date_updated": 0})
@@ -63,7 +63,7 @@ module.exports.readAllOrders = (request, response) => {
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Delete order in order collection
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-module.exports.deleteOrder = (request, response) => {
+exports.deleteOrder = (request, response) => {
 
 	var query = Order.findOneAndRemove({createdBy: request.decode.id, _id: request.params.order_id});
 

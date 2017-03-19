@@ -12,12 +12,12 @@ var mongoose 	= require('mongoose')
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Create a product in product collection
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-module.exports.createProductForm = (request, response) => {
+exports.createProductForm = (request, response) => {
 	var product = new Product;
 	response.render('create-product.ejs', {product:product});
 };
 
-module.exports.createProduct = (request, response) => {
+exports.createProduct = (request, response) => {
 	
 	var path = request.files[0].path;
  	var imageName = request.files[0].originalname;
@@ -61,7 +61,7 @@ module.exports.createProduct = (request, response) => {
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Read a product by using product ID as parameter
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-module.exports.readProduct = (request, response) => {
+exports.readProduct = (request, response) => {
 
 	var query = Product.findById({_id: request.params.product_id})
 	.select({"__v": 0, "date_updated": 0})
@@ -91,7 +91,7 @@ module.exports.readProduct = (request, response) => {
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Read all products in product collection
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-module.exports.readAllProducts = (request, response) => {
+exports.readAllProducts = (request, response) => {
 
 	var query = Product.find({})
 	.select({"__v": 0, "date_updated": 0})
@@ -119,7 +119,7 @@ module.exports.readAllProducts = (request, response) => {
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Read all products created by user id
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-module.exports.readAllProductsByUserId = (request, response) => {
+exports.readAllProductsByUserId = (request, response) => {
 
 	var query = Product.find({createdBy: request.decode.id})
 	.select({"__v": 0, "dateUpdated": 0})
@@ -146,7 +146,7 @@ module.exports.readAllProductsByUserId = (request, response) => {
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Update product in product collection
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-module.exports.updateProduct = (request, response) => {
+exports.updateProduct = (request, response) => {
 
 	var query = Product.findOne({createdBy: request.decode.id, _id: request.params.product_id});
 
@@ -196,7 +196,7 @@ module.exports.updateProduct = (request, response) => {
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Delete product in product collection
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-module.exports.deleteProduct = (request, response) => {
+exports.deleteProduct = (request, response) => {
 
 	var query = Product.findOneAndRemove({createdBy: request.decode.id, _id: request.params.product_id});
 
